@@ -27,7 +27,8 @@ else:
 #json='Cert_190456-196531_8TeV_13Jul2012ReReco_Collisions12_JSON_v2.txt'
 #json='Cert_190456-206940_8TeV_PromptReco_Collisions12_JSON.txt'
 #Folder in LJMet where the lists of file names are kepy
-localFileDir='LJMet/Com/python/Samples_2012/Dilepton/'
+localFileDir='LJMet/singletPrime/fileLists/'
+
 
 #Configuration options parsed from arguments
 #Switching to getopt for compatibility with older python
@@ -126,7 +127,7 @@ int_file = open(dir+'/'+'interactive.csh','w')
 
 while ( nfiles <= count ):    
     
-    py_templ_file = open(relBase+'/src/LJMet/Com/condor/DileptonTemplate.py')
+    py_templ_file = open(relBase+'/src/LJMet/singletPrime/condor/singletPrimeTemplate.py')
     
     py_file = open(dir+'/'+prefix+'_'+str(j)+'.py','w')
 
@@ -156,7 +157,7 @@ os.system('chmod +x '+dir+'/'+'interactive.csh')
 
 njobs = j - 1
 
-jdl_templ_file = open(relBase+'/src/LJMet/Com/condor/DileptonTemplate.jdl')
+jdl_templ_file = open(relBase+'/src/LJMet/singletPrime/condor/singletPrimeTemplate.jdl')
 jdl_file       = open(dir+'/'+prefix+'.jdl','w')
 
 
@@ -169,7 +170,7 @@ for line in jdl_templ_file:
 
 jdl_file.close()
 
-os.system('sed -e \'s/SETUP/'+setupString+'/g\' DileptonTemplate.csh > '+dir+'/'+prefix+'.csh')
+os.system('sed -e \'s/SETUP/'+setupString+'/g\' singletPrimeTemplate.csh > '+dir+'/'+prefix+'.csh')
 
 if (submit):
     savedPath = os.getcwd()
