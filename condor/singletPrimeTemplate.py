@@ -18,7 +18,7 @@ condorJSON = str('CONDOR_JSON')
 process.load('LJMet.Com.ljmet_cfi')
 process.ljmet.isMc = cms.bool(True)
 process.ljmet.excluded_calculators = cms.vstring(
-    'WprimeCalc',
+#    'WprimeCalc',
     'DileptonCalc',
     'StopCalc',
     'PdfCalc',

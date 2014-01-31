@@ -1,0 +1,35 @@
+import FWCore.ParameterSet.Config as cms
+
+maxEvents = cms.untracked.PSet( input = cms.untracked.int32(-1) )
+readFiles = cms.untracked.vstring()
+secFiles = cms.untracked.vstring() 
+source = cms.Source ("PoolSource",fileNames = readFiles, secondaryFileNames = secFiles)
+readFiles.extend( [
+       '/store/user/lpctlbsm/swanson/TprimeToBWinc_M-750_TuneZ2star_8TeV-madgraph/Summer12_DR53X-PU_S10_START53_V7A-v1_TLBSM_53x_v3/99bd99199697666ff01397dad5652e9e/tlbsm_53x_v3_mc_10_1_lvB.root',
+       '/store/user/lpctlbsm/swanson/TprimeToBWinc_M-750_TuneZ2star_8TeV-madgraph/Summer12_DR53X-PU_S10_START53_V7A-v1_TLBSM_53x_v3/99bd99199697666ff01397dad5652e9e/tlbsm_53x_v3_mc_11_1_PxQ.root',
+       '/store/user/lpctlbsm/swanson/TprimeToBWinc_M-750_TuneZ2star_8TeV-madgraph/Summer12_DR53X-PU_S10_START53_V7A-v1_TLBSM_53x_v3/99bd99199697666ff01397dad5652e9e/tlbsm_53x_v3_mc_12_3_x7j.root',
+       '/store/user/lpctlbsm/swanson/TprimeToBWinc_M-750_TuneZ2star_8TeV-madgraph/Summer12_DR53X-PU_S10_START53_V7A-v1_TLBSM_53x_v3/99bd99199697666ff01397dad5652e9e/tlbsm_53x_v3_mc_15_1_IHC.root',
+       '/store/user/lpctlbsm/swanson/TprimeToBWinc_M-750_TuneZ2star_8TeV-madgraph/Summer12_DR53X-PU_S10_START53_V7A-v1_TLBSM_53x_v3/99bd99199697666ff01397dad5652e9e/tlbsm_53x_v3_mc_16_1_R2W.root',
+       '/store/user/lpctlbsm/swanson/TprimeToBWinc_M-750_TuneZ2star_8TeV-madgraph/Summer12_DR53X-PU_S10_START53_V7A-v1_TLBSM_53x_v3/99bd99199697666ff01397dad5652e9e/tlbsm_53x_v3_mc_17_1_UPI.root',
+       '/store/user/lpctlbsm/swanson/TprimeToBWinc_M-750_TuneZ2star_8TeV-madgraph/Summer12_DR53X-PU_S10_START53_V7A-v1_TLBSM_53x_v3/99bd99199697666ff01397dad5652e9e/tlbsm_53x_v3_mc_18_1_p5U.root',
+       '/store/user/lpctlbsm/swanson/TprimeToBWinc_M-750_TuneZ2star_8TeV-madgraph/Summer12_DR53X-PU_S10_START53_V7A-v1_TLBSM_53x_v3/99bd99199697666ff01397dad5652e9e/tlbsm_53x_v3_mc_19_1_Tip.root',
+       '/store/user/lpctlbsm/swanson/TprimeToBWinc_M-750_TuneZ2star_8TeV-madgraph/Summer12_DR53X-PU_S10_START53_V7A-v1_TLBSM_53x_v3/99bd99199697666ff01397dad5652e9e/tlbsm_53x_v3_mc_1_1_X6k.root',
+       '/store/user/lpctlbsm/swanson/TprimeToBWinc_M-750_TuneZ2star_8TeV-madgraph/Summer12_DR53X-PU_S10_START53_V7A-v1_TLBSM_53x_v3/99bd99199697666ff01397dad5652e9e/tlbsm_53x_v3_mc_20_2_bLo.root',
+       '/store/user/lpctlbsm/swanson/TprimeToBWinc_M-750_TuneZ2star_8TeV-madgraph/Summer12_DR53X-PU_S10_START53_V7A-v1_TLBSM_53x_v3/99bd99199697666ff01397dad5652e9e/tlbsm_53x_v3_mc_21_2_dvp.root',
+       '/store/user/lpctlbsm/swanson/TprimeToBWinc_M-750_TuneZ2star_8TeV-madgraph/Summer12_DR53X-PU_S10_START53_V7A-v1_TLBSM_53x_v3/99bd99199697666ff01397dad5652e9e/tlbsm_53x_v3_mc_22_2_lZQ.root',
+       '/store/user/lpctlbsm/swanson/TprimeToBWinc_M-750_TuneZ2star_8TeV-madgraph/Summer12_DR53X-PU_S10_START53_V7A-v1_TLBSM_53x_v3/99bd99199697666ff01397dad5652e9e/tlbsm_53x_v3_mc_23_1_0Eq.root',
+       '/store/user/lpctlbsm/swanson/TprimeToBWinc_M-750_TuneZ2star_8TeV-madgraph/Summer12_DR53X-PU_S10_START53_V7A-v1_TLBSM_53x_v3/99bd99199697666ff01397dad5652e9e/tlbsm_53x_v3_mc_24_1_Vt5.root',
+       '/store/user/lpctlbsm/swanson/TprimeToBWinc_M-750_TuneZ2star_8TeV-madgraph/Summer12_DR53X-PU_S10_START53_V7A-v1_TLBSM_53x_v3/99bd99199697666ff01397dad5652e9e/tlbsm_53x_v3_mc_25_2_cQC.root',
+       '/store/user/lpctlbsm/swanson/TprimeToBWinc_M-750_TuneZ2star_8TeV-madgraph/Summer12_DR53X-PU_S10_START53_V7A-v1_TLBSM_53x_v3/99bd99199697666ff01397dad5652e9e/tlbsm_53x_v3_mc_26_1_x6x.root',
+       '/store/user/lpctlbsm/swanson/TprimeToBWinc_M-750_TuneZ2star_8TeV-madgraph/Summer12_DR53X-PU_S10_START53_V7A-v1_TLBSM_53x_v3/99bd99199697666ff01397dad5652e9e/tlbsm_53x_v3_mc_2_1_Qwf.root',
+       '/store/user/lpctlbsm/swanson/TprimeToBWinc_M-750_TuneZ2star_8TeV-madgraph/Summer12_DR53X-PU_S10_START53_V7A-v1_TLBSM_53x_v3/99bd99199697666ff01397dad5652e9e/tlbsm_53x_v3_mc_3_3_mDF.root',
+       '/store/user/lpctlbsm/swanson/TprimeToBWinc_M-750_TuneZ2star_8TeV-madgraph/Summer12_DR53X-PU_S10_START53_V7A-v1_TLBSM_53x_v3/99bd99199697666ff01397dad5652e9e/tlbsm_53x_v3_mc_4_1_l8H.root',
+       '/store/user/lpctlbsm/swanson/TprimeToBWinc_M-750_TuneZ2star_8TeV-madgraph/Summer12_DR53X-PU_S10_START53_V7A-v1_TLBSM_53x_v3/99bd99199697666ff01397dad5652e9e/tlbsm_53x_v3_mc_5_1_yUG.root',
+       '/store/user/lpctlbsm/swanson/TprimeToBWinc_M-750_TuneZ2star_8TeV-madgraph/Summer12_DR53X-PU_S10_START53_V7A-v1_TLBSM_53x_v3/99bd99199697666ff01397dad5652e9e/tlbsm_53x_v3_mc_6_1_h4U.root',
+       '/store/user/lpctlbsm/swanson/TprimeToBWinc_M-750_TuneZ2star_8TeV-madgraph/Summer12_DR53X-PU_S10_START53_V7A-v1_TLBSM_53x_v3/99bd99199697666ff01397dad5652e9e/tlbsm_53x_v3_mc_7_1_toP.root',
+       '/store/user/lpctlbsm/swanson/TprimeToBWinc_M-750_TuneZ2star_8TeV-madgraph/Summer12_DR53X-PU_S10_START53_V7A-v1_TLBSM_53x_v3/99bd99199697666ff01397dad5652e9e/tlbsm_53x_v3_mc_8_2_OYE.root',
+       '/store/user/lpctlbsm/swanson/TprimeToBWinc_M-750_TuneZ2star_8TeV-madgraph/Summer12_DR53X-PU_S10_START53_V7A-v1_TLBSM_53x_v3/99bd99199697666ff01397dad5652e9e/tlbsm_53x_v3_mc_9_1_i6l.root' ] );
+
+
+secFiles.extend( [
+               ] )
