@@ -152,7 +152,7 @@ process.inputs = cms.PSet (
 
 # JSON
 if not condorIsMC:
-    JsonFile = relBase+'/src/LJMet/Com/data/json/'+condorJSON
+    JsonFile = relBase+'/src/LJMet/singletPrime/json/'+condorJSON
     myList   = LumiList.LumiList(filename=JsonFile).getCMSSWString().split(',')
     process.inputs.lumisToProcess.extend(myList)
         
