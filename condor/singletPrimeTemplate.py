@@ -16,7 +16,7 @@ condorJSON = str('CONDOR_JSON')
 #
 # FWLite application options
 process.load('LJMet.Com.ljmet_cfi')
-process.ljmet.isMc = cms.bool(True)
+process.ljmet.isMc = cms.bool(condorIsMC)
 process.ljmet.excluded_calculators = cms.vstring(
 #    'WprimeCalc',
     'DileptonCalc',
