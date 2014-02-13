@@ -16,6 +16,7 @@ fi
 if [ "$2" == true ]; 
 then
 
+python singletPrimeSubmit.py --useMC True --sample WJets --fileList WJets_Madgraph.txt --submit True
 python singletPrimeSubmit.py --useMC True --sample W1Jets --fileList W1Jets_Madgraph.txt --submit True
 python singletPrimeSubmit.py --useMC True --sample TT_LH --fileList TTJETS_SemiLeptonic_Madgraph.txt --submit True
 
