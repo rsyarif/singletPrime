@@ -18,12 +18,12 @@ condorJSON = str('CONDOR_JSON')
 process.load('LJMet.Com.ljmet_cfi')
 process.ljmet.isMc = cms.bool(condorIsMC)
 process.ljmet.excluded_calculators = cms.vstring(
-#    'WprimeCalc',
     'DileptonCalc',
     'StopCalc',
     'PdfCalc',
     'ChargedHiggsCalc',
-    'TprimeCalc'
+    'TprimeCalc',
+    'LjetsTopoCalc'
     ) 
 
 # common calculator options
@@ -99,8 +99,8 @@ process.event_selector = cms.PSet(
     trigger_consistent       = cms.bool(True),
     second_lepton_veto       = cms.bool(True),
     
-    met_cuts                 = cms.bool(False),
-    min_met                  = cms.double(20.0),
+    met_cuts                 = cms.bool(True),
+    min_met                  = cms.double(0.0),
     
     btag_cuts                = cms.bool(True),
     btagger                  = cms.string('combinedSecondaryVertexBJetTags'),
