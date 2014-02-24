@@ -41,6 +41,8 @@ process.WprimeCalc.isWJets = cms.bool(False)
 process.load('LJMet.Com.ljetsTopoCalcNew_cfi')
 process.LjetsTopoCalcNew.useBestTop = cms.bool(True)
 
+# Stop calculator options
+process.load('LJMet.Com.JetSubCalc_cfi')
 
 ############################################################
 #
