@@ -80,7 +80,7 @@ process.event_selector = cms.PSet(
     jet_maxeta               = cms.double(4.7),
     min_jet                  = cms.int32(1),
     max_jet                  = cms.int32(4000),
-    leading_jet_pt           = cms.double(100.0),
+    leading_jet_pt           = cms.double(200.0),
     removeJetLepOverlap		 = cms.bool(True),
 
     muon_cuts                = cms.bool(True),
