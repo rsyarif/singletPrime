@@ -16,14 +16,14 @@ condorJSON = str('CONDOR_JSON')
 #
 # FWLite application options
 process.load('LJMet.Com.ljmet_cfi')
-process.ljmet.isMc = cms.bool(True)
+process.ljmet.isMc = cms.bool(condorIsMC)
 process.ljmet.excluded_calculators = cms.vstring(
-    'WprimeCalc',
     'DileptonCalc',
     'StopCalc',
     'PdfCalc',
     'ChargedHiggsCalc',
-    'TprimeCalc'
+    'TprimeCalc',
+    'LjetsTopoCalc'
     ) 
 
 # common calculator options
@@ -41,6 +41,8 @@ process.WprimeCalc.isWJets = cms.bool(False)
 process.load('LJMet.Com.ljetsTopoCalcNew_cfi')
 process.LjetsTopoCalcNew.useBestTop = cms.bool(True)
 
+# Stop calculator options
+process.load('LJMet.Com.JetSubCalc_cfi')
 
 ############################################################
 #
@@ -78,7 +80,8 @@ process.event_selector = cms.PSet(
     jet_maxeta               = cms.double(4.7),
     min_jet                  = cms.int32(1),
     max_jet                  = cms.int32(4000),
-    leading_jet_pt           = cms.double(100.0),
+    leading_jet_pt           = cms.double(200.0),
+    removeJetLepOverlap		 = cms.bool(True),
 
     muon_cuts                = cms.bool(True),
     tight_muon_minpt         = cms.double(26.0), # 26 GeV
@@ -99,8 +102,8 @@ process.event_selector = cms.PSet(
     trigger_consistent       = cms.bool(True),
     second_lepton_veto       = cms.bool(True),
     
-    met_cuts                 = cms.bool(False),
-    min_met                  = cms.double(20.0),
+    met_cuts                 = cms.bool(True),
+    min_met                  = cms.double(0.0),
     
     btag_cuts                = cms.bool(True),
     btagger                  = cms.string('combinedSecondaryVertexBJetTags'),
@@ -124,7 +127,7 @@ process.event_selector = cms.PSet(
     met_collection           = cms.InputTag('patMETsPFlow'),
     type1corrmet_collection  = cms.InputTag('pfType1CorrectedMet'),
 
-    do53xJEC                 = cms.bool(False),
+    do53xJEC                 = cms.bool(True),
 
     MCL1JetPar               = cms.string(relBase+'/src/LJMet/Com/data/START53_V7G_L1FastJet_AK5PFchs.txt'),
     MCL2JetPar               = cms.string(relBase+'/src/LJMet/Com/data/START53_V7G_L2Relative_AK5PFchs.txt'),
@@ -152,7 +155,7 @@ process.inputs = cms.PSet (
 
 # JSON
 if not condorIsMC:
-    JsonFile = relBase+'/src/LJMet/Com/data/json/'+condorJSON
+    JsonFile = relBase+'/src/LJMet/singletPrime/json/'+condorJSON
     myList   = LumiList.LumiList(filename=JsonFile).getCMSSWString().split(',')
     process.inputs.lumisToProcess.extend(myList)
         
