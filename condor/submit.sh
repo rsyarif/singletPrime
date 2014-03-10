@@ -41,4 +41,10 @@ python singletPrimeSubmit.py --useMC False --sample Mu2012B --fileList singleMu2
 python singletPrimeSubmit.py --useMC False --sample Mu2012C --fileList singleMu2012C_22Jan2013.txt --json Jan222013ReReco_json.txt --submit True
 python singletPrimeSubmit.py --useMC False --sample Mu2012D --fileList singleMu2012D_22Jan2013.txt --json Jan222013ReReco_json.txt --submit True
 
+python singletPrimeSubmit.py --useMC False --sample Ele2012A --fileList singleEle2012A_22Jan2013.txt --json Jan222013ReReco_json.txt --submit True
+python singletPrimeSubmit.py --useMC False --sample Ele2012B --fileList singleEle2012B_22Jan2013.txt --json Jan222013ReReco_json.txt --submit True
+#I might be missing some 2012C Electron Data?
+python singletPrimeSubmit.py --useMC False --sample Ele2012C --fileList singleEle2012C_22Jan2013.txt --json Jan222013ReReco_json.txt --submit True
+python singletPrimeSubmit.py --useMC False --sample Ele2012D --fileList singleEle2012D_22Jan2013.txt --json Jan222013ReReco_json.txt --submit True
+
 fi
