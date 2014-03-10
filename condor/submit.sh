@@ -19,6 +19,15 @@ then
 python singletPrimeSubmit.py --useMC True --sample WJets --fileList WJets_Madgraph.txt --submit True
 python singletPrimeSubmit.py --useMC True --sample W1Jets --fileList W1Jets_Madgraph.txt --submit True
 python singletPrimeSubmit.py --useMC True --sample TT_LH --fileList TTJETS_SemiLeptonic_Madgraph.txt --submit True
+python singletPrimeSubmit.py --useMC True --sample TT_LL --fileList TTJETS_Leptonic_Madgraph.txt --submit True
+python singletPrimeSubmit.py --useMC True --sample TT_HH --fileList TTJETS_Hadronic_Madgraph.txt --submit True
+python singletPrimeSubmit.py --useMC True --sample T_SChn --fileList T_SChannel_Powheg.txt --submit True
+python singletPrimeSubmit.py --useMC True --sample T_TChn --fileList T_TChannel_Powheg.txt --submit True
+python singletPrimeSubmit.py --useMC True --sample T_tWChn --fileList T_tWChannel_Powheg.txt --submit True
+python singletPrimeSubmit.py --useMC True --sample Tb_SChn --fileList TBar_SChannel_Powheg.txt --submit True
+python singletPrimeSubmit.py --useMC True --sample Tb_TChn --fileList TBar_TChannel_Powheg.txt --submit True
+python singletPrimeSubmit.py --useMC True --sample Tb_tWChn --fileList TBar_tWChannel_Powheg.txt --submit True
+
 
 fi
 
