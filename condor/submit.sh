@@ -1,5 +1,9 @@
 #!/bin/sh
 
+#Initiate Valid Grid Cert
+
+voms-proxy-init -valid 240:00
+
 ####### MC Signal
 
 if [ "$1" == true ]; 
