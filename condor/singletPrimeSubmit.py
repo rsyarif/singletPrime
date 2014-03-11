@@ -18,7 +18,7 @@ if (socket.gethostname().find('brux')>=0) :
 elif (socket.gethostname().find('fnal')>=0):
     print "Submitting jobs at FNAL"
     sePath='\'root://xrootd.unl.edu/'
-    #sePath='\'/eos'      
+    #sePath='\'/eos/uscms'      
     setupString='source \/uscmst1\/prod\/sw\/cms\/cshrc prod'
 else:
     print "Script not done for ", socket.gethostname()
