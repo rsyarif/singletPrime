@@ -1,7 +1,7 @@
 #!/bin/sh
 
 mkdir sandbox
-cd sanbox
+cd sandbox
 
 hadd WJets.root ../WJets/*.root
 hadd TT_LH.root ../TT_LH/*.root
