@@ -43,7 +43,7 @@ int main (int argc, char* argv[])
    else if(parser.integerValue("doOneD")) {
    
      doPU=2;     
-     LumiWeightsOld = new edm::LumiReWeighting("../PileUp/MC_Summer12_PU_S10-600bins.root ","../PileUp/Data_Pileup_2012_ReRecoPixel-600bins.root","pileup","pileup");     
+     LumiWeightsOld = new edm::LumiReWeighting("../../PileUp/MC_Summer12_PU_S10-600bins.root ","../../PileUp/Data_Pileup_2012_ReRecoPixel-600bins.root","pileup","pileup");     
      
    }
 
