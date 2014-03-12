@@ -89,12 +89,12 @@ void readdir(TDirectory *dir,optutl::CommandLineParser parser,float ev,int doPU,
 
       TBranch *newBranch = t->Branch(parser.stringValue("branch").c_str(),&weight,(parser.stringValue("branch")+"/F").c_str());
       int vertices;
-      double bx=0;
+      double bxd=0;
 
       if(doPU==1)
 		t->SetBranchAddress("nPV_WprimeCalc",&vertices);
       else if( doPU==2 ){
-      	t->SetBranchAddress("nTrueInteractions_PileUpCalc",&bx);
+      	t->SetBranchAddress("nTrueInteractions_PileUpCalc",&bxd);
       }
 
       printf("Found tree -> weighting\n");
@@ -113,7 +113,8 @@ void readdir(TDirectory *dir,optutl::CommandLineParser parser,float ev,int doPU,
 
 	  	}
 	  	else if(doPU==2) {
-	    	weight*=LumiWeightsOld->weight(bx);
+	  		bxf = float(bxd);
+	    	weight*=LumiWeightsOld->weight(bxf);
 	  	}
 
 	  	newBranch->Fill();
