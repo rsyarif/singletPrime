@@ -29,6 +29,7 @@ int main (int argc, char* argv[])
    
 
    //read PU info
+   TH1F *puWeight=0;
    int doPU=0;
    TFile *fPU = new TFile("../puInfo.root");
 
