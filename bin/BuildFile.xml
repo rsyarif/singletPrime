@@ -7,6 +7,5 @@
 <use   name="roostats"/>
 <use   name="roottmva"/>
 
-</bin>
 <bin   name="EventWeightsIterative" file="EventWeightsIterative.cc">
 </bin>
