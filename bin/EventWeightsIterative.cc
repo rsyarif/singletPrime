@@ -89,7 +89,7 @@ void readdir(TDirectory *dir,optutl::CommandLineParser parser,float ev,int doPU,
 
       TBranch *newBranch = t->Branch(parser.stringValue("branch").c_str(),&weight,(parser.stringValue("branch")+"/F").c_str());
       int vertices;
-      float bx=0;
+      double bx=0;
 
       if(doPU==1)
 		t->SetBranchAddress("nPV_WprimeCalc",&vertices);
