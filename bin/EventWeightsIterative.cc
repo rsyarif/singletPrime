@@ -113,7 +113,7 @@ void readdir(TDirectory *dir,optutl::CommandLineParser parser,float ev,int doPU,
 
 	  	}
 	  	else if(doPU==2) {
-	  		bxf = float(bxd);
+	  		float bxf = float(bxd);
 	    	weight*=LumiWeightsOld->weight(bxf);
 	  	}
 
