@@ -94,7 +94,7 @@ void readdir(TDirectory *dir,optutl::CommandLineParser parser,float ev,int doPU,
       if(doPU==1)
 		t->SetBranchAddress("nPV_WprimeCalc",&vertices);
       else if( doPU==2 ){
-      	t->SetBranchAddress("nInteractions_PileUpCalc",&bx);
+      	t->SetBranchAddress("nTrueInteractions_PileUpCalc",&bx);
       }
 
       printf("Found tree -> weighting\n");
