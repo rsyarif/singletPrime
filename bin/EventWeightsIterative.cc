@@ -29,7 +29,6 @@ int main (int argc, char* argv[])
    
 
    //read PU info
-   TH1F *puWeight=0;
    int doPU=0;
    TFile *fPU = new TFile("../puInfo.root");
 
@@ -67,7 +66,7 @@ int main (int argc, char* argv[])
 } 
 
 
-void readdir(TDirectory *dir,optutl::CommandLineParser parser,float ev,int doPU,bool doRho,TH1F *puWeight,TH1F *rhoWeight) 
+void readdir(TDirectory *dir,optutl::CommandLineParser parser,float ev,int doPU) 
 {
   TDirectory *dirsav = gDirectory;
   TIter next(dir->GetListOfKeys());
