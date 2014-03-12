@@ -12,7 +12,7 @@ std::vector<float> data;
 std::vector<float> mc;
 edm::LumiReWeighting *LumiWeightsOld;
 
-void readdir(TDirectory *dir,optutl::CommandLineParser parser,float ev,int doPU); 
+void readdir(TDirectory *dir,optutl::CommandLineParser parser,float ev,int doPU,TH1F* puWeight); 
 
 
 
@@ -59,7 +59,7 @@ int main (int argc, char* argv[])
    
    TFile *f = new TFile(parser.stringValue("outputFile").c_str(),"UPDATE");   
 
-   readdir(f,parser,ev,doPU);
+   readdir(f,parser,ev,doPU,puWeight);
    f->Close();
    if(fPU!=0 && fPU->IsOpen())
      fPU->Close();
@@ -67,7 +67,7 @@ int main (int argc, char* argv[])
 } 
 
 
-void readdir(TDirectory *dir,optutl::CommandLineParser parser,float ev,int doPU) 
+void readdir(TDirectory *dir,optutl::CommandLineParser parser,float ev,int doPU,TH1F *puWeight) 
 {
   TDirectory *dirsav = gDirectory;
   TIter next(dir->GetListOfKeys());
@@ -79,7 +79,7 @@ void readdir(TDirectory *dir,optutl::CommandLineParser parser,float ev,int doPU)
     if (obj->IsA()->InheritsFrom(TDirectory::Class())) {
       dir->cd(key->GetName());
       TDirectory *subdir = gDirectory;
-      readdir(subdir,parser,ev,doPU);
+      readdir(subdir,parser,ev,doPU,puWeight);
       dirsav->cd();
     }
     else if(obj->IsA()->InheritsFrom(TTree::Class())) {
