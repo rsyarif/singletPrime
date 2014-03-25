@@ -43,4 +43,4 @@ for file in files:
                 print '\t'+file
         current.close()
 
-print "% Faile = ", count_failed/float(count_total)
+print "Failure Rate = ", count_failed/float(count_total)
