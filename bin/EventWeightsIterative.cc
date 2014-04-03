@@ -21,6 +21,7 @@ int main (int argc, char* argv[])
    optutl::CommandLineParser parser ("Sets Event Weights in the ntuple");
    parser.addOption("histoName",optutl::CommandLineParser::kString,"Counter Histogram Name","EventSummary");
    parser.addOption("weight",optutl::CommandLineParser::kDouble,"Weight to apply",1.0);
+   parser.addOption("events",optutl::CommandLineParser::kDouble,"Number of AOD Events",0);
    parser.addOption("branch",optutl::CommandLineParser::kString,"Branch","__WEIGHT__");
    parser.addOption("doOneD",optutl::CommandLineParser::kInteger,"Do OneD",0);
 
@@ -55,7 +56,13 @@ int main (int argc, char* argv[])
    
    g->Close();
    
-   printf("Found  %f Events Counted\n",ev);
+   if (events > 0){
+   	ev = events;
+   	printf("%f events entered manually\n",ev);
+   }
+   else{
+   	printf("Found  %f Events Counted\n",ev);
+   }
    
    TFile *f = new TFile(parser.stringValue("outputFile").c_str(),"UPDATE");   
 
