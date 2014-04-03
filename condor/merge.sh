@@ -14,20 +14,24 @@ hadd Tbs.root ../Tb_SChn/*.root
 hadd Tbt.root ../Tb_TChn/*.root
 hadd Tbtw.root ../Tb_tWChn/*.root
 
-hadd TpBW750.root ../TpBW/*.root 
-hadd TpTZ750.root ../TpTZ/*.root 
-hadd TpTH750.root ../TpTH/*.root
+#hadd TpBW750.root ../TpBW/*.root 
+#hadd TpTZ750.root ../TpTZ/*.root 
+#hadd TpTH750.root ../TpTH/*.root
 
 hadd Mu2012A.root ../Mu2012A/*.root
 hadd Mu2012B.root ../Mu2012B/*.root
-hadd Mu2012C.root ../Mu2012C/*.root
-hadd Mu2012D.root ../Mu2012D/*.root
+hadd Mu2012C_1.root ../Mu2012C/Mu2012C_[1,2,3,4]*.root
+hadd Mu2012C_2.root ../Mu2012C/Mu2012C_[5,6,7,8,9]*.root
+hadd Mu2012D_1.root ../Mu2012D/Mu2012D_[1,2,3,4]*.root
+hadd Mu2012D_2.root ../Mu2012D/Mu2012D_[5,6,7,8,9]*.root
 hadd mu2012.root Mu2012*.root
 
 hadd Ele2012A.root ../Ele2012A/*.root
 hadd Ele2012B.root ../Ele2012B/*.root
-hadd Ele2012C.root ../Ele2012C/*.root
-hadd Ele2012D.root ../Ele2012D/*.root
+hadd Ele2012C_1.root ../Ele2012C/Ele2012C_[1,2,3,4]*.root
+hadd Ele2012C_2.root ../Ele2012C/Ele2012C_[5,6,7,8,9]*.root
+hadd Ele2012D_1.root ../Ele2012D/Ele2012D_[1,2,3,4]*.root
+hadd Ele2012D_2.root ../Ele2012D/Ele2012D_[5,6,7,8,9]*.root
 hadd ele2012.root Ele2012*.root
 
 
