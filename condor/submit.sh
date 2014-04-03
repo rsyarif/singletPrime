@@ -31,6 +31,10 @@ python singletPrimeSubmit.py --useMC True --sample T_tWChn --fileList T_tWChanne
 python singletPrimeSubmit.py --useMC True --sample Tb_SChn --fileList TBar_SChannel_Powheg.txt --submit True
 python singletPrimeSubmit.py --useMC True --sample Tb_TChn --fileList TBar_TChannel_Powheg.txt --submit True
 python singletPrimeSubmit.py --useMC True --sample Tb_tWChn --fileList TBar_tWChannel_Powheg.txt --submit True
+python singletPrimeSubmit.py --useMC True --sample WW --fileList WW_Pythia.txt --submit True
+python singletPrimeSubmit.py --useMC True --sample WZ --fileList WZ_Pythia.txt --submit True
+python singletPrimeSubmit.py --useMC True --sample ZZ --fileList ZZ_Pythia.txt --submit True
+python singletPrimeSubmit.py --useMC True --sample ZJets --fileList DYJets_Madgraph.txt --submit True
 
 
 fi
