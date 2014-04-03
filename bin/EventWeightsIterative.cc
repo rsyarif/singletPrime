@@ -21,7 +21,7 @@ int main (int argc, char* argv[])
    optutl::CommandLineParser parser ("Sets Event Weights in the ntuple");
    parser.addOption("histoName",optutl::CommandLineParser::kString,"Counter Histogram Name","EventSummary");
    parser.addOption("weight",optutl::CommandLineParser::kDouble,"Weight to apply",1.0);
-   parser.addOption("events",optutl::CommandLineParser::kDouble,"Number of AOD Events",0);
+   parser.addOption("events",optutl::CommandLineParser::kInteger,"Number of AOD Events",0);
    parser.addOption("branch",optutl::CommandLineParser::kString,"Branch","__WEIGHT__");
    parser.addOption("doOneD",optutl::CommandLineParser::kInteger,"Do OneD",0);
 
@@ -56,7 +56,7 @@ int main (int argc, char* argv[])
    
    g->Close();
    
-   float events = parser.doubleValue("events");
+   int events = parser.integerValue("events");
    if (events > 0){
    	ev = events;
    	printf("%f events entered manually\n",ev);
