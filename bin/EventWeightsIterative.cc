@@ -56,7 +56,7 @@ int main (int argc, char* argv[])
    
    g->Close();
    
-   events = parser.doubleValue("events");
+   float events = parser.doubleValue("events");
    if (events > 0){
    	ev = events;
    	printf("%f events entered manually\n",ev);
