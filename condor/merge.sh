@@ -51,9 +51,9 @@ hadd ele2012.root Ele2012*.root
 #EventWeightsIterative outputFile='TpTZ750.root'      doOneD=1   weight=1.0   events=     histoName='histos/nevents'
 #EventWeightsIterative outputFile='TpBW750.root'      doOneD=1   weight=1.0   events=     histoName='histos/nevents'
 
-EventWeightsIterative outputFile='TT_LH.root'        doOneD=1   weight=109.3   events=25424818	  histoName='histos/nevents'
-EventWeightsIterative outputFile='TT_LL.root'        doOneD=1   weight=26.2    events=4246444	  histoName='histos/nevents'
-EventWeightsIterative outputFile='TT_HH.root'        doOneD=1   weight=114     events=10537444	  histoName='histos/nevents'
+EventWeightsIterative outputFile='TT_LH.root'        doOneD=1   weight=104.7   events=25424818	  histoName='histos/nevents'
+EventWeightsIterative outputFile='TT_LL.root'        doOneD=1   weight=25.1    events=4246444	  histoName='histos/nevents'
+EventWeightsIterative outputFile='TT_HH.root'        doOneD=1   weight=109.2     events=10537444	  histoName='histos/nevents'
 hadd TT.root TT_LH.root TT_LL.root TT_HH.root
 
 EventWeightsIterative outputFile='Ttw.root'  	     doOneD=1   weight=11.1    events=497658	  histoName='histos/nevents' 
