@@ -23,7 +23,8 @@ process.ljmet.excluded_calculators = cms.vstring(
     'PdfCalc',
     'ChargedHiggsCalc',
     'TprimeCalc',
-    'LjetsTopoCalc'
+    'LjetsTopoCalc',
+    'WprimeCalc'
     ) 
 
 # common calculator options
