@@ -23,7 +23,8 @@ process.ljmet.excluded_calculators = cms.vstring(
     'PdfCalc',
     'ChargedHiggsCalc',
     'TprimeCalc',
-    'LjetsTopoCalc'
+    'LjetsTopoCalc',
+    'WprimeCalc'
     ) 
 
 # common calculator options
@@ -34,8 +35,8 @@ process.CommonCalc.dummy_parameter = cms.string('Dummy parameter value')
 process.load('LJMet.Com.stopCalc_cfi')
 
 # Wprime calculator options
-process.load('LJMet.Com.wprimeCalc_cfi')
-process.WprimeCalc.isWJets = cms.bool(False)
+process.load('LJMet.Com.singleLepCalc_cfi')
+process.singleLepCalc.isWJets = cms.bool(False)
 
 # LjetsTopoCalc options
 process.load('LJMet.Com.ljetsTopoCalcNew_cfi')
@@ -50,7 +51,7 @@ process.load('LJMet.Com.JetSubCalc_cfi')
 #
 process.event_selector = cms.PSet(
 
-    selection = cms.string('WprimeSelector'),
+    selection = cms.string('singleLepSelector'),
 
     # cuts
     debug  = cms.bool(False),
