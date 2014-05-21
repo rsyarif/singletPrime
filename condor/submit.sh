@@ -9,9 +9,9 @@ voms-proxy-init -valid 240:00
 if [ "$1" == true ]; 
 then
 
-python singletPrimeSubmit.py --useMC True --sample TpBW --fileList TprimeToBW_750_Madgraph.txt --submit True --local False
-python singletPrimeSubmit.py --useMC True --sample TpTH --fileList TprimeToTH_750_Madgraph.txt --submit True --local False
-python singletPrimeSubmit.py --useMC True --sample TpTZ --fileList TprimeToTZ_750_Madgraph.txt --submit True --local False
+python singletPrimeSubmit.py --useMC True --sample TpBW --fileList TprimeToBW_750_Madgraph.txt --submit True --local True
+python singletPrimeSubmit.py --useMC True --sample TpTH --fileList TprimeToTH_750_Madgraph.txt --submit True --local True
+python singletPrimeSubmit.py --useMC True --sample TpTZ --fileList TprimeToTZ_750_Madgraph.txt --submit True --local True
 
 fi
 

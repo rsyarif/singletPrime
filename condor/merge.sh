@@ -65,6 +65,10 @@ EventWeightsIterative outputFile='Tbt.root'  	     doOneD=1   weight=30.7    eve
 hadd STOP.root Ttw.root Tbtw.root Ts.root Tbs.root Tt.root Tbt.root
 
 EventWeightsIterative outputFile='WJets.root'        doOneD=1   weight=36703   events=76102995	  histoName='histos/nevents'
+EventWeightsIterative outputFile='W1Jets.root'        doOneD=1   weight=6460   events=23141598	  histoName='histos/nevents'
+EventWeightsIterative outputFile='W2Jets.root'        doOneD=1   weight=2065   events=34044921	  histoName='histos/nevents'
+EventWeightsIterative outputFile='W3Jets.root'        doOneD=1   weight=620   events=15539503	  histoName='histos/nevents'
+EventWeightsIterative outputFile='W4Jets.root'        doOneD=1   weight=254   events=13382803	  histoName='histos/nevents'
 EventWeightsIterative outputFile='ZJets.root'        doOneD=1   weight=3504   events=30459503	  histoName='histos/nevents'
 
 EventWeightsIterative outputFile='WW.root'        	 doOneD=1   weight=56     events=10000431	  histoName='histos/nevents'
