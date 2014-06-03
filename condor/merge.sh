@@ -4,6 +4,18 @@ mkdir sandbox
 cd sandbox
 
 hadd WJets.root ../WJets/*.root
+hadd W1Jets_1.root ../W1Jets/W1Jets*_[1,5,6]*.root
+hadd W1Jets_2.root ../W1Jets/W1Jets*_[2,7,8]*.root
+hadd W1Jets_3.root ../W1Jets/W1Jets*_[3,4,9]*.root
+hadd W1Jets.root W1Jets_1.root W1Jets_2.root W1Jets_3.root
+hadd W2Jets_1.root ../W2Jets/W2Jets*_[1,5,6]*.root
+hadd W2Jets_2.root ../W2Jets/W2Jets*_[2,7,8]*.root
+hadd W2Jets_3.root ../W2Jets/W2Jets*_[3,4,9]*.root
+hadd W2Jets.root W2Jets_1.root W2Jets_2.root W2Jets_3.root
+hadd W3Jets_1.root ../W3Jets/W3Jets*_[1,3,4,5]*.root
+hadd W3Jets_2.root ../W3Jets/W3Jets*_[2,6,7,8,9]*.root
+hadd W3Jets.root W3Jets_1.root W3Jets_2.root
+hadd W4Jets.root ../W4Jets/*.root
 hadd TT_LH.root ../TT_LH/*.root
 hadd TT_LL.root ../TT_LL/*.root
 hadd TT_HH.root ../TT_HH/*.root
@@ -17,14 +29,6 @@ hadd WW.root ../WW/*.root
 hadd WZ.root ../WZ/*.root
 hadd ZZ.root ../ZZ/*.root
 hadd ZJets.root ../ZJets/*.root
-hadd QCD_170.root ../QCD170/*.root
-hadd QCD_300.root ../QCD300/*.root
-hadd QCD_470.root ../QCD470/*.root
-hadd QCD_600.root ../QCD600/*.root
-hadd QCD_800.root ../QCD800/*.root
-hadd QCD_1000.root ../QCD1000/*.root
-hadd QCD_1400.root ../QCD1400/*.root
-hadd QCD_1800.root ../QCD1800/*.root
 
 hadd TpBW750.root ../TpBW/*.root 
 hadd TpTZ750.root ../TpTZ/*.root 
@@ -76,14 +80,4 @@ EventWeightsIterative outputFile='ZZ.root'        	 doOneD=1   weight=17     eve
 EventWeightsIterative outputFile='WZ.root'        	 doOneD=1   weight=33.6   events=10000283	  histoName='histos/nevents'
 hadd VV.root WW.root WZ.root ZZ.root
 
-EventWeightsIterative outputFile='QCD_170.root'        doOneD=1   weight=34138   events=5814398	  histoName='histos/nevents'
-EventWeightsIterative outputFile='QCD_300.root'        doOneD=1   weight=1760   	events=5978500	  histoName='histos/nevents'
-EventWeightsIterative outputFile='QCD_470.root'        doOneD=1   weight=114   	events=3994848	  histoName='histos/nevents'
-EventWeightsIterative outputFile='QCD_600.root'        doOneD=1   weight=27   	events=3996864	  histoName='histos/nevents'
-EventWeightsIterative outputFile='QCD_800.root'        doOneD=1   weight=3.6   	events=3998563	  histoName='histos/nevents'
-EventWeightsIterative outputFile='QCD_1000.root'       doOneD=1   weight=0.7   	events=1964088	  histoName='histos/nevents'
-EventWeightsIterative outputFile='QCD_1400.root'       doOneD=1   weight=0.03   	events=2000062	  histoName='histos/nevents'
-EventWeightsIterative outputFile='QCD_1800.root'       doOneD=1   weight=0.002  	events=971974	  histoName='histos/nevents'
-hadd QCD.root QCD_*.root
-
-rm Mu2012*.root Ele2012*.root TT_LH.root TT_HH.root TT_LL.root Ttw.root Tbtw.root Ts.root Tbs.root Tt.root Tbt.root WW.root WZ.root ZZ.root QCD_*.root
+rm Mu2012*.root Ele2012*.root W*Jets_*.root TT_LH.root TT_HH.root TT_LL.root Ttw.root Tbtw.root Ts.root Tbs.root Tt.root Tbt.root WW.root WZ.root ZZ.root QCD_*.root
