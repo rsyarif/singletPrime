@@ -363,12 +363,12 @@ void makeDataCard(std::string var, std::string outfile, int bins, float min, flo
 	if(chn == "mu"){
 		d = new TFile("mu2012.root");
 		data = makeHistogram("data",d,f,var,cut,bins,min,max);
-		weight = "__WEIGHT__*weight_MuonEff_WprimeCalc*"+lumi;
+		weight = "__WEIGHT__*weight_MuonEff_singleLepCalc*"+lumi;
 	}
 	else if(chn == "ele"){
 		d = new TFile("ele2012.root");
 		data = makeHistogram("data",d,f,var,cut,bins,min,max);
-		weight = "__WEIGHT__*weight_ElectronEff_53x_WprimeCalc*"+lumi;
+		weight = "__WEIGHT__*weight_ElectronEff_53x_singleLepCalc*"+lumi;
 	}
 	else{
 		std::cout << "Undefined Channel!! Bad things are about to happen" << std::endl;
