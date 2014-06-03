@@ -10,7 +10,7 @@ void PlotComp(TString Var, TString nBins, TString lBin, TString hBin, TString XL
 	TFile f1("TpBW750.root");
 	TFile f2("TpTH750.root");
 	TFile f3("TpTZ750.root");
-	TFile f4("TT_LH.root");
+	TFile f4("TT.root");
 	TFile f5("WJets.root");
  	//gStyle->SetOptStat(2211);
  	

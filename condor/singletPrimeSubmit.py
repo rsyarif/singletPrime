@@ -11,18 +11,18 @@ import socket
 files_per_job = 1
 #Absolute path that precedes '/store...'
 
-if (socket.gethostname().find('brux')>=0) :
-    print "Submitting jobs at Brown"
-    sePath='\'file:///mnt/hadoop' 
-    setupString='source \/state\/partition1\/osg_app\/cmssoft\/cms\/cmsset_default.csh'
-elif (socket.gethostname().find('fnal')>=0):
-    print "Submitting jobs at FNAL"
-    sePath='\'root://xrootd.unl.edu/'
-    #sePath='\'/eos/uscms'      
-    setupString='source \/uscmst1\/prod\/sw\/cms\/cshrc prod'
-else:
-    print "Script not done for ", socket.gethostname()
-    exit()
+# if (socket.gethostname().find('brux')>=0) :
+#     print "Submitting jobs at Brown"
+#     sePath='\'file:///mnt/hadoop' 
+#     setupString='source \/state\/partition1\/osg_app\/cmssoft\/cms\/cmsset_default.csh'
+# elif (socket.gethostname().find('fnal')>=0):
+#     print "Submitting jobs at FNAL"
+#     sePath='\'root://xrootd.unl.edu/'
+#     sePath='\'/eos/uscms'      
+#     setupString='source \/uscmst1\/prod\/sw\/cms\/cshrc prod'
+# else:
+#     print "Script not done for ", socket.gethostname()
+#     exit()
 
 #JSON file stored in LJMet/Com/data/json/ 
 #json='Cert_190456-196531_8TeV_13Jul2012ReReco_Collisions12_JSON_v2.txt'
@@ -34,7 +34,7 @@ localFileDir='LJMet/singletPrime/fileLists/'
 #Configuration options parsed from arguments
 #Switching to getopt for compatibility with older python
 try:
-    opts, args = getopt.getopt(sys.argv[1:], "", ["useMC=", "sample=","dataType=","fileList=", "outDir=","submit=","json="])
+    opts, args = getopt.getopt(sys.argv[1:], "", ["useMC=", "sample=","dataType=","fileList=", "outDir=","submit=","json=","local="])
 except getopt.GetoptError as err:
     print str(err)
     sys.exit(1)
@@ -46,6 +46,7 @@ fileList = str('None')
 outDir   = str('None')
 json     = str('None')
 submit   = bool(False)
+local	 = bool(False)
 
 for o, a in opts:
     print o, a
@@ -61,7 +62,9 @@ for o, a in opts:
     elif o == "--dataType": dataType = str(a)
     elif o == "--fileList": fileList = str(a)
     elif o == "--outDir":   outDir   = str(a)
-    elif o == "--json":     json   = str(a)
+    elif o == "--json":     json     = str(a)
+    elif o == "--local":
+    	if a == 'True':		local = True
     elif o == "--submit":
         if a == 'True':     submit = True
 
@@ -71,6 +74,25 @@ for o, a in opts:
 # if (not checkDataType and not useMC):
 #     print '--dataType for real data must be ElEl, ElMu or MuMu!'
 #     sys.exit(1)
+
+if (socket.gethostname().find('brux')>=0) :
+    print "Submitting jobs at Brown"
+    if (local) :
+    	sePath='\'file:///mnt/hadoop'
+    else :
+    	sePath='\'root://xrootd.unl.edu/'
+    setupString='source \/state\/partition1\/osg_app\/cmssoft\/cms\/cmsset_default.csh'
+elif (socket.gethostname().find('fnal')>=0):
+    print "Submitting jobs at FNAL"
+    if (local) :
+    	sePath='\'/eos/uscms'
+    else :
+    	sePath='\'root://xrootd.unl.edu/'      
+    setupString='source \/uscmst1\/prod\/sw\/cms\/cshrc prod'
+else:
+    print "Script not done for ", socket.gethostname()
+    exit()
+
 
 relBase = os.environ['CMSSW_BASE']
 

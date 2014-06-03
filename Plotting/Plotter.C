@@ -2,12 +2,17 @@ makePlot(std::string var, std::string decay, int bins, float min, float max, std
 {
 
 	makeDataCard(var, "tmp.root", bins, min, max, cut, lumi, chn, decay);
-	makeStackPlot(TString(var),TString(decay),"tmp.root",labelX,units,left,log,dndm,doRatio);
+	if(log){
+		makeStackPlot(TString(var)+"_"+TString(chn)+"_LOG",TString(decay),"tmp.root",labelX,TString(chn),units,left,log,dndm,doRatio);
+	}
+	else{
+		makeStackPlot(TString(var)+"_"+TString(chn),TString(decay),"tmp.root",labelX,TString(chn),units,left,log,dndm,doRatio);
+	}
 
 }
 
 
-makeStackPlot(TString name,TString decay,TString file,TString labelX,TString units = "GeV",bool left=false,bool log = false,bool dndm=false,bool doRatio = false)
+makeStackPlot(TString name,TString decay,TString file,TString labelX,TString chn,TString units = "GeV",bool left=false,bool log = false,bool dndm=false,bool doRatio = false)
 {
 
   setStyle();
@@ -25,6 +30,9 @@ makeStackPlot(TString name,TString decay,TString file,TString labelX,TString uni
 	}
 	else if(decay == "BW"){
 		SigLeg = "T`#rightarrow BW";
+	}
+	else if(decay == "ALL"){
+		SigLeg = "Will Plot All";
 	}
 	else{
 		std::cout << "Signal decay is undefined, not plotting signal" << std::endl;
@@ -74,9 +82,9 @@ makeStackPlot(TString name,TString decay,TString file,TString labelX,TString uni
   if (dndm) convertToDNDM(data);
   applyDATAStyle(data);
 
-//   TH1F * QCD = (TH1F*)(f->Get("QCD"));
-//   if (dndm) convertToDNDM(QCD);
-//   applyStyle(QCD,kMagenta-10,1,1001);
+  //TH1F * QCD = (TH1F*)(f->Get("QCD"));
+  //if (dndm) convertToDNDM(QCD);
+  //applyStyle(QCD,kMagenta-10,1,1001);
 
   TH1F * ttbar = (TH1F*)(f->Get("ttbar"));
   if (dndm) convertToDNDM(ttbar);
@@ -88,27 +96,48 @@ makeStackPlot(TString name,TString decay,TString file,TString labelX,TString uni
 
 
   TH1F * EWK = (TH1F*)(f->Get("wjets"));
-  // EWK->Add((TH1F*)(f->Get(dir+"/VV")));
+  EWK->Add((TH1F*)(f->Get("VV")));
+  EWK->Add((TH1F*)(f->Get("zjets")));
   if (dndm) convertToDNDM(EWK);
   applyStyle(EWK,kRed+2,1,1001);
 
-  if(SigLeg != ""){
+  if(decay == "TH"){
 	  TH1F *signal = (TH1F*)(f->Get("TH_750"));
 	  if (dndm) convertToDNDM(signal);
 	  applySignalStyle(signal);
   }
-
+  else if(decay == "TZ"){
+	  TH1F *signal = (TH1F*)(f->Get("TZ_750"));
+	  if (dndm) convertToDNDM(signal);
+	  applySignalStyle2(signal);  
+  }
+  else if(decay == "BW"){
+	  TH1F *signal = (TH1F*)(f->Get("BW_750"));
+	  if (dndm) convertToDNDM(signal);
+	  applySignalStyle3(signal);  
+  }
+  else if(decay == "ALL"){
+	  TH1F *signal = (TH1F*)(f->Get("TH_750"));
+	  TH1F *signal2 = (TH1F*)(f->Get("TZ_750"));
+	  TH1F *signal3 = (TH1F*)(f->Get("BW_750"));
+	  if (dndm){ convertToDNDM(signal); convertToDNDM(signal2); convertToDNDM(signal3);}
+  	  applySignalStyle(signal);
+	  applySignalStyle2(signal2);  
+	  applySignalStyle3(signal3);
+  }
+  
+  
   THStack *hs = new THStack("hs","");
   TLegend *l = new TLegend(xR,0.6,xR+0.5,0.9);
 
   l->AddEntry(data,"Observed","P");
 
-  l->AddEntry(EWK,"W+Jets","F");
-  // l->AddEntry(QCD,"QCD","F");
+  l->AddEntry(EWK,"EWK","F");
+  //l->AddEntry(QCD,"QCD","F");
   l->AddEntry(ttbar,"t#bar{t}","F");
   l->AddEntry(stop,"Single t","F");
 
-  if(SigLeg != ""){
+  if(decay == "TH" || decay == "TZ" || decay == "BW"){
 	  if(log){
 		l->AddEntry(signal,SigLeg,"L");
 	  }
@@ -116,8 +145,20 @@ makeStackPlot(TString name,TString decay,TString file,TString labelX,TString uni
 		l->AddEntry(signal,SigLeg,"F");
 	  }
   }
-    
-  // hs->Add(QCD);
+  else if(SigLeg != ""){
+	  if(log){
+		l->AddEntry(signal,"T`#rightarrow TH","L");
+		l->AddEntry(signal2,"T`#rightarrow TZ","L");
+		l->AddEntry(signal3,"T`#rightarrow BW","L");
+	  }
+	  else{
+		l->AddEntry(signal,"T`#rightarrow TH","F");
+		l->AddEntry(signal2,"T`#rightarrow TZ","F");
+		l->AddEntry(signal3,"T`#rightarrow BW","F");
+	  }  
+  }
+      
+  //hs->Add(QCD);
   hs->Add(EWK);
   hs->Add(stop);
   hs->Add(ttbar);
@@ -139,7 +180,42 @@ makeStackPlot(TString name,TString decay,TString file,TString labelX,TString uni
 
   if(dndm)       hs->SetMinimum(0.001);
 
+  //Draw the error for MC unc and systematics if needed
+  TH1F* errorBand = (TH1F*)EWK->Clone();
+  
+  //Systematic values if needed
+  float w  = 0;
+  float tt = 0;
+  float t  = 0;
+  float q  = 0;
+	
+  errorBand->Add(ttbar);
+  errorBand->Add(stop);
+  //errorBand->Add(QCD);
+  
+  errorBand  ->SetMarkerSize(0);
+  errorBand  ->SetFillColor(1);
+  errorBand  ->SetFillStyle(3013);
+  errorBand  ->SetLineWidth(1);
+  
+  l->AddEntry(errorBand, "bkg. uncertainty" , "F" );
+  float wErr = 0;
+  float ttErr = 0;
+  float tErr = 0;
+  float qErr = 0;
+  
+  for(int i=1;i<errorBand->GetNbinsX();++i){
+		wErr = EWK->GetBinContent(i)*w + EWK->GetBinError(i);
+		ttErr = ttbar->GetBinContent(i)*tt + ttbar->GetBinError(i);
+		tErr = stop->GetBinContent(i)*t + stop->GetBinError(i);
+		//qErr = QCD->GetBinContent(i)*q + QCD->GetBinError(i);
+		errorBand->SetBinError(i,wErr+ttErr+tErr+qErr);
+  }  
+  
+    
+  
   hs->Draw("HIST");
+  errorBand->Draw("e2same");
   if(doRatio){
   	hs->GetXaxis()->SetLabelSize(0);
   }
@@ -155,8 +231,14 @@ makeStackPlot(TString name,TString decay,TString file,TString labelX,TString uni
   if(dndm)
     hs->GetYaxis()->SetTitle("dN/d"+labelX);
 
-  if(SigLeg != "")
+  if(decay == "TH" || decay == "TZ" || decay == "BW"){
   	signal->Draw("HIST,SAME");
+  }
+  else if(SigLeg != ""){
+  	signal->Draw("HIST,SAME");
+  	signal2->Draw("HIST,SAME");
+  	signal3->Draw("HIST,SAME");
+  }
   data->Draw("e,SAME");
   
   c->cd();
@@ -239,7 +321,12 @@ makeStackPlot(TString name,TString decay,TString file,TString labelX,TString uni
   latex.SetTextAlign(11);
 
   latex.SetTextFont(42);
-  latex.DrawLatex(0.20,0.94,"CMS Preliminary 2012, 19.3 fb^{-1}, #sqrt{s} = 8 TeV");
+  if(chn == "mu"){
+  	latex.DrawLatex(0.20,0.94,"CMS Preliminary 2012, 19.3 fb^{-1}, #sqrt{s} = 8 TeV, #mu^{#pm}");
+  }
+  else{
+  	latex.DrawLatex(0.20,0.94,"CMS Preliminary 2012, 19.3 fb^{-1}, #sqrt{s} = 8 TeV, e^{#pm}");  
+  }
 
  if(log)
    plotPad->SetLogy();
@@ -258,23 +345,30 @@ void makeDataCard(std::string var, std::string outfile, int bins, float min, flo
 	TFile *f = new TFile(outfile.c_str(),"Recreate");
 	TFile *d;
 	TFile *s;
+	TFile *s2;
+	TFile *s3;
 	float data;
 	float sig;
+	float sig2;
+	float sig3;
 	float ttbar;
 	float wjets;
 	float singletop;
+	//float qcd;
+	float vv;
+	float zjets;
 	
 	std::string weight = "__WEIGHT__*"+lumi;
 	
 	if(chn == "mu"){
 		d = new TFile("mu2012.root");
 		data = makeHistogram("data",d,f,var,cut,bins,min,max);
-		weight = "__WEIGHT__*weight_MuonEff_WprimeCalc*"+lumi;
+		weight = "__WEIGHT__*weight_MuonEff_singleLepCalc*"+lumi;
 	}
 	else if(chn == "ele"){
 		d = new TFile("ele2012.root");
 		data = makeHistogram("data",d,f,var,cut,bins,min,max);
-		weight = "__WEIGHT__*weight_ElectronEff_53x_WprimeCalc*"+lumi;
+		weight = "__WEIGHT__*weight_ElectronEff_53x_singleLepCalc*"+lumi;
 	}
 	else{
 		std::cout << "Undefined Channel!! Bad things are about to happen" << std::endl;
@@ -283,14 +377,28 @@ void makeDataCard(std::string var, std::string outfile, int bins, float min, flo
 	if(decay == "TH"){
 		s = new TFile("TpTH750.root");
 		sig = makeHistogram("TH_750",s,f,var,"("+cut+")*"+weight,bins,min,max);
+		s->Close();
 	}
 	else if(decay == "TZ"){
 		s = new TFile("TpTZ750.root");
 		sig = makeHistogram("TZ_750",s,f,var,"("+cut+")*"+weight,bins,min,max);
+		s->Close();
 	}
 	else if(decay == "BW"){
 		s = new TFile("TpBW750.root");
 		sig = makeHistogram("BW_750",s,f,var,"("+cut+")*"+weight,bins,min,max);
+		s->Close();
+	}
+	else if(decay == "ALL"){
+		s = new TFile("TpTH750.root");
+		sig = makeHistogram("TH_750",s,f,var,"("+cut+")*"+weight,bins,min,max);
+		s->Close();
+		s2 = new TFile("TpTZ750.root");
+		sig2 = makeHistogram("TZ_750",s2,f,var,"("+cut+")*"+weight,bins,min,max);
+		s2->Close();
+		s3 = new TFile("TpBW750.root");
+		sig3 = makeHistogram("BW_750",s3,f,var,"("+cut+")*"+weight,bins,min,max);
+		s3->Close();
 	}
 	else{
 		std::cout << "Signal decay is undefined, what stupid thing have you done" << std::endl;
@@ -301,7 +409,19 @@ void makeDataCard(std::string var, std::string outfile, int bins, float min, flo
 	ttbar = makeHistogram("ttbar",tt,f,var,"("+cut+")*"+weight,bins,min,max);
 	TFile *t = new TFile("STOP.root");
 	singletop = makeHistogram("singletop",t,f,var,"("+cut+")*"+weight,bins,min,max);
+	//TFile *q = new TFile("QCD.root");
+	//qcd = makeHistogram("QCD",q,f,var,"("+cut+")*"+weight,bins,min,max);
+	TFile *v = new TFile("VV.root");
+	vv = makeHistogram("VV",v,f,var,"("+cut+")*"+weight,bins,min,max);
+	TFile *z = new TFile("ZJets.root");
+	zjets = makeHistogram("zjets",z,f,var,"("+cut+")*"+weight,bins,min,max);
 	f->Close();
+	w->Close();
+	tt->Close();
+	t->Close();
+	//q->Close();
+	v->Close();
+	z->Close();
 
 }
 
@@ -345,6 +465,21 @@ void applySignalStyle(TH1F* h)
   h->SetLineStyle(11);
 }
 
+void applySignalStyle2(TH1F* h)
+{
+  h->SetFillStyle(0);
+  h->SetLineWidth(3);
+  h->SetLineColor(kAzure+1);
+  h->SetLineStyle(11);
+}
+
+void applySignalStyle3(TH1F* h)
+{
+  h->SetFillStyle(0);
+  h->SetLineWidth(3);
+  h->SetLineColor(kGreen+2);
+  h->SetLineStyle(11);
+}
 
 void applyDATAStyle(TH1F* h)
 {
