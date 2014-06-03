@@ -4,10 +4,7 @@ mkdir sandbox
 cd sandbox
 
 hadd WJets.root ../WJets/*.root
-hadd W1Jets_1.root ../W1Jets/W1Jets*_[1,5,6]*.root
-hadd W1Jets_2.root ../W1Jets/W1Jets*_[2,7,8]*.root
-hadd W1Jets_3.root ../W1Jets/W1Jets*_[3,4,9]*.root
-hadd W1Jets.root W1Jets_1.root W1Jets_2.root W1Jets_3.root
+hadd W1Jets.root ../W1Jets/*.root
 hadd W2Jets_1.root ../W2Jets/W2Jets*_[1,5,6]*.root
 hadd W2Jets_2.root ../W2Jets/W2Jets*_[2,7,8]*.root
 hadd W2Jets_3.root ../W2Jets/W2Jets*_[3,4,9]*.root
