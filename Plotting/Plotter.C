@@ -1,18 +1,18 @@
-makePlot(std::string var, std::string decay, int bins, float min, float max, std::string cut, std::string lumi, std::string chn,TString labelX,TString units = "GeV",bool left=false,bool log = false,bool dndm=false,bool doRatio = false)
+makePlot(std::string var, std::string decay, int bins, float min, float max, std::string cut, std::string lumi, std::string chn,TString labelX,TString units = "GeV",bool left=false,bool log = false,bool dndm=false,bool doRatio = false, std::string folder_name)
 {
 
-	makeDataCard(var, "tmp.root", bins, min, max, cut, lumi, chn, decay);
+  makeDataCard(var, "tmp.root", bins, min, max, cut, lumi, chn, decay);
 	if(log){
-		makeStackPlot(TString(var)+"_"+TString(chn)+"_LOG",TString(decay),"tmp.root",labelX,TString(chn),units,left,log,dndm,doRatio);
+	  makeStackPlot(TString(var)+"_"+TString(chn)+"_LOG",TString(decay),"tmp.root",labelX,TString(chn),units,left,log,dndm,doRatio, folder_name);
 	}
 	else{
-		makeStackPlot(TString(var)+"_"+TString(chn),TString(decay),"tmp.root",labelX,TString(chn),units,left,log,dndm,doRatio);
+	  makeStackPlot(TString(var)+"_"+TString(chn),TString(decay),"tmp.root",labelX,TString(chn),units,left,log,dndm,doRatio, folder_name);
 	}
 
 }
 
 
-makeStackPlot(TString name,TString decay,TString file,TString labelX,TString chn,TString units = "GeV",bool left=false,bool log = false,bool dndm=false,bool doRatio = false)
+makeStackPlot(TString name,TString decay,TString file,TString labelX,TString chn,TString units = "GeV",bool left=false,bool log = false,bool dndm=false,bool doRatio = false, TString folder_name, TString parent_folder="Plots")
 {
 
   setStyle();
@@ -31,12 +31,15 @@ makeStackPlot(TString name,TString decay,TString file,TString labelX,TString chn
 	else if(decay == "BW"){
 		SigLeg = "T`#rightarrow BW";
 	}
+	else if(decay == "TH_TZ"){
+		SigLeg = "Will Plot TH and TZ";
+	}
 	else if(decay == "ALL"){
 		SigLeg = "Will Plot All";
 	}
 	else{
 		std::cout << "Signal decay is undefined, not plotting signal" << std::endl;
-	}
+	} 
 	
 	
   if(doRatio){
@@ -116,6 +119,13 @@ makeStackPlot(TString name,TString decay,TString file,TString labelX,TString chn
 	  if (dndm) convertToDNDM(signal);
 	  applySignalStyle3(signal);  
   }
+  else if(decay == "TH_TZ"){
+	  TH1F *signal = (TH1F*)(f->Get("TH_750"));
+	  TH1F *signal2 = (TH1F*)(f->Get("TZ_750"));
+	  if (dndm){ convertToDNDM(signal); convertToDNDM(signal2);}
+  	  applySignalStyle(signal);
+	  applySignalStyle2(signal2);  
+  }
   else if(decay == "ALL"){
 	  TH1F *signal = (TH1F*)(f->Get("TH_750"));
 	  TH1F *signal2 = (TH1F*)(f->Get("TZ_750"));
@@ -144,6 +154,16 @@ makeStackPlot(TString name,TString decay,TString file,TString labelX,TString chn
 	  else{
 		l->AddEntry(signal,SigLeg,"F");
 	  }
+  }
+  else if(decay == "TH_TZ"){
+	  if(log){
+		l->AddEntry(signal,"T`#rightarrow TH","L");
+		l->AddEntry(signal2,"T`#rightarrow TZ","L");
+	  }
+	  else{
+		l->AddEntry(signal,"T`#rightarrow TH","F");
+		l->AddEntry(signal2,"T`#rightarrow TZ","F");
+	  }  
   }
   else if(SigLeg != ""){
 	  if(log){
@@ -233,6 +253,10 @@ makeStackPlot(TString name,TString decay,TString file,TString labelX,TString chn
 
   if(decay == "TH" || decay == "TZ" || decay == "BW"){
   	signal->Draw("HIST,SAME");
+  }
+  else if(decay == "TH_TZ"){
+  	signal->Draw("HIST,SAME");
+  	signal2->Draw("HIST,SAME");
   }
   else if(SigLeg != ""){
   	signal->Draw("HIST,SAME");
@@ -332,9 +356,9 @@ makeStackPlot(TString name,TString decay,TString file,TString labelX,TString chn
    plotPad->SetLogy();
 
  // c->RedrawAxis(); 
-  c->SaveAs("Plots/"+name+".png");
-  c->SaveAs("Plots/"+name+".pdf");
-  c->SaveAs("Plots/"+name+".root");
+  c->SaveAs(parent_folder+"/"+folder_name+"/"+name+".png");
+  c->SaveAs(parent_folder+"/"+folder_name+"/"+name+".pdf");
+  c->SaveAs(parent_folder+"/"+folder_name+"/"+name+".root");
 
 }
 
@@ -389,6 +413,14 @@ void makeDataCard(std::string var, std::string outfile, int bins, float min, flo
 		sig = makeHistogram("BW_750",s,f,var,"("+cut+")*"+weight,bins,min,max);
 		s->Close();
 	}
+	else if(decay =="TH_TZ"){
+		s = new TFile("TpTH750.root");
+		sig = makeHistogram("TH_750",s,f,var,"("+cut+")*"+weight,bins,min,max);
+		s->Close();
+		s2 = new TFile("TpTZ750.root");
+		sig2 = makeHistogram("TZ_750",s2,f,var,"("+cut+")*"+weight,bins,min,max);
+		s2->Close();
+	}  
 	else if(decay == "ALL"){
 		s = new TFile("TpTH750.root");
 		sig = makeHistogram("TH_750",s,f,var,"("+cut+")*"+weight,bins,min,max);
