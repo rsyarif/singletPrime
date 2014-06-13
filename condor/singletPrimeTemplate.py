@@ -140,7 +140,6 @@ process.event_selector = cms.PSet(
     DataResJetPar            = cms.string(relBase+'/src/LJMet/singletPrime/JEC/Summer13_V4_DATA_L2L3Residual_AK5PFchs.txt')
     )
 
-
 #######################################################
 #
 # Input files
