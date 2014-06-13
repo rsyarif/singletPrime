@@ -18,14 +18,14 @@ condorJSON = str('CONDOR_JSON')
 process.load('LJMet.Com.ljmet_cfi')
 process.ljmet.isMc = cms.bool(condorIsMC)
 process.ljmet.excluded_calculators = cms.vstring(
-    'DileptonCalc',
-    'StopCalc',
-    'PdfCalc',
-    'ChargedHiggsCalc',
-    'TprimeCalc',
-    'LjetsTopoCalc',
-    'WprimeCalc'
-    ) 
+	'DileptonCalc',
+	'StopCalc',
+	'PdfCalc',
+	'ChargedHiggsCalc',
+	'TprimeCalc',
+	'LjetsTopoCalc',
+	'WprimeCalc'
+	) 
 
 # common calculator options
 process.load('LJMet.Com.commonCalc_cfi')
