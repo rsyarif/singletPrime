@@ -18,14 +18,14 @@ condorJSON = str('CONDOR_JSON')
 process.load('LJMet.Com.ljmet_cfi')
 process.ljmet.isMc = cms.bool(condorIsMC)
 process.ljmet.excluded_calculators = cms.vstring(
-    'DileptonCalc',
-    'StopCalc',
-    'PdfCalc',
-    'ChargedHiggsCalc',
-    'TprimeCalc',
-    'LjetsTopoCalc',
-    'WprimeCalc'
-    ) 
+	'DileptonCalc',
+	'StopCalc',
+	'PdfCalc',
+	'ChargedHiggsCalc',
+	'TprimeCalc',
+	'LjetsTopoCalc',
+	'WprimeCalc'
+	) 
 
 # common calculator options
 process.load('LJMet.Com.commonCalc_cfi')
@@ -130,14 +130,14 @@ process.event_selector = cms.PSet(
 
     do53xJEC                 = cms.bool(True),
 
-    MCL1JetPar               = cms.string(relBase+'/src/LJMet/singletPrime/JEC/Summer13_V4_MC_L1FastJet_AK5PF.txt'),
-    MCL2JetPar               = cms.string(relBase+'/src/LJMet/singletPrime/JEC/Summer13_V4_MC_L2Relative_AK5PF.txt'),
-    MCL3JetPar               = cms.string(relBase+'/src/LJMet/singletPrime/JEC/Summer13_V4_MC_L3Absolute_AK5PF.txt'),
+    MCL1JetPar               = cms.string(relBase+'/src/LJMet/singletPrime/JEC/Summer13_V4_MC_L1FastJet_AK5PFchs.txt'),
+    MCL2JetPar               = cms.string(relBase+'/src/LJMet/singletPrime/JEC/Summer13_V4_MC_L2Relative_AK5PFchs.txt'),
+    MCL3JetPar               = cms.string(relBase+'/src/LJMet/singletPrime/JEC/Summer13_V4_MC_L3Absolute_AK5PFchs.txt'),
 
-    DataL1JetPar             = cms.string(relBase+'/src/LJMet/singletPrime/JEC/Summer13_V4_DATA_L1FastJet_AK5PF.txt'),
-    DataL2JetPar             = cms.string(relBase+'/src/LJMet/singletPrime/JEC/Summer13_V4_DATA_L2Relative_AK5PF.txt'),
-    DataL3JetPar             = cms.string(relBase+'/src/LJMet/singletPrime/JEC/Summer13_V4_DATA_L3Absolute_AK5PF.txt'),
-    DataResJetPar            = cms.string(relBase+'/src/LJMet/singletPrime/JEC/Summer13_V4_DATA_L2L3Residual_AK5PF.txt')
+    DataL1JetPar             = cms.string(relBase+'/src/LJMet/singletPrime/JEC/Summer13_V4_DATA_L1FastJet_AK5PFchs.txt'),
+    DataL2JetPar             = cms.string(relBase+'/src/LJMet/singletPrime/JEC/Summer13_V4_DATA_L2Relative_AK5PFchs.txt'),
+    DataL3JetPar             = cms.string(relBase+'/src/LJMet/singletPrime/JEC/Summer13_V4_DATA_L3Absolute_AK5PFchs.txt'),
+    DataResJetPar            = cms.string(relBase+'/src/LJMet/singletPrime/JEC/Summer13_V4_DATA_L2L3Residual_AK5PFchs.txt')
     )
 
 
