@@ -102,6 +102,7 @@ process.event_selector = cms.PSet(
     max_tight_lepton         = cms.int32(1),
     trigger_consistent       = cms.bool(True),
     second_lepton_veto       = cms.bool(True),
+    tau_veto				 = cms.bool(False),
     
     met_cuts                 = cms.bool(True),
     min_met                  = cms.double(0.0),
@@ -125,6 +126,7 @@ process.event_selector = cms.PSet(
     jet_collection           = cms.InputTag('goodPatJetsPFlow'),
     muon_collection          = cms.InputTag('selectedPatMuonsPFlow'),
     electron_collection      = cms.InputTag('selectedPatElectronsPFlow'),
+    tau_collection			 = cms.InputTag('selectedPatTausPFlow'),
     met_collection           = cms.InputTag('patMETsPFlow'),
     type1corrmet_collection  = cms.InputTag('pfType1CorrectedMet'),
 
