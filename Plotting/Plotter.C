@@ -183,6 +183,21 @@ makeStackPlot(TString name,TString decay,TString file,TString labelX,TString chn
   hs->Add(stop);
   hs->Add(ttbar);
 
+  if(!log){
+	if(decay == "TH" || decay == "TZ" || decay == "BW"){
+		hs->Add(signal);
+	}
+	else if(decay == "TH_TZ"){
+		hs->Add(signal);
+		hs->Add(signal2);
+	}
+	else if(SigLeg != ""){
+		hs->Add(signal);
+		hs->Add(signal2);
+		hs->Add(signal3);
+	}
+  }
+  
   hs->Draw("HIST");
   if(data->GetMaximum()*1.2+sqrt(data->GetMaximum())>hs->GetMaximum()) {
     float max=0.0;
@@ -251,18 +266,21 @@ makeStackPlot(TString name,TString decay,TString file,TString labelX,TString chn
   if(dndm)
     hs->GetYaxis()->SetTitle("dN/d"+labelX);
 
-  if(decay == "TH" || decay == "TZ" || decay == "BW"){
-  	signal->Draw("HIST,SAME");
+  if(log){
+	if(decay == "TH" || decay == "TZ" || decay == "BW"){
+		signal->Draw("HIST,SAME");
+	}
+	else if(decay == "TH_TZ"){
+		signal->Draw("HIST,SAME");
+		signal2->Draw("HIST,SAME");
+	}
+	else if(SigLeg != ""){
+		signal->Draw("HIST,SAME");
+		signal2->Draw("HIST,SAME");
+		signal3->Draw("HIST,SAME");
+	}
   }
-  else if(decay == "TH_TZ"){
-  	signal->Draw("HIST,SAME");
-  	signal2->Draw("HIST,SAME");
-  }
-  else if(SigLeg != ""){
-  	signal->Draw("HIST,SAME");
-  	signal2->Draw("HIST,SAME");
-  	signal3->Draw("HIST,SAME");
-  }
+  
   data->Draw("e,SAME");
   
   c->cd();
@@ -356,9 +374,11 @@ makeStackPlot(TString name,TString decay,TString file,TString labelX,TString chn
    plotPad->SetLogy();
 
  // c->RedrawAxis(); 
-  c->SaveAs(parent_folder+"/"+folder_name+"/"+name+".png");
-  c->SaveAs(parent_folder+"/"+folder_name+"/"+name+".pdf");
-  c->SaveAs(parent_folder+"/"+folder_name+"/"+name+".root");
+  c->SaveAs(folder_name+"/"+name+".png");
+  //c->SaveAs(folder_name+"/"+name+".pdf");
+  //c->SaveAs(folder_name+"/"+name+".root");
+  
+  f->Close();
 
 }
 
@@ -388,11 +408,13 @@ void makeDataCard(std::string var, std::string outfile, int bins, float min, flo
 		d = new TFile("mu2012.root");
 		data = makeHistogram("data",d,f,var,cut,bins,min,max);
 		weight = "__WEIGHT__*weight_MuonEff_singleLepCalc*"+lumi;
+		d->Close();
 	}
 	else if(chn == "ele"){
 		d = new TFile("ele2012.root");
 		data = makeHistogram("data",d,f,var,cut,bins,min,max);
 		weight = "__WEIGHT__*weight_ElectronEff_53x_singleLepCalc*"+lumi;
+		d->Close();
 	}
 	else{
 		std::cout << "Undefined Channel!! Bad things are about to happen" << std::endl;
