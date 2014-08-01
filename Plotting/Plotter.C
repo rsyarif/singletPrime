@@ -479,6 +479,71 @@ void makeDataCard(std::string var, std::string outfile, int bins, float min, flo
 
 }
 
+void makeThetaCard(std::string var, std::string outfile, int bins, float min, float max, std::string cut, std::string lumi, std::string chn, std::string cat) {
+
+	TFile *f = new TFile(outfile.c_str(),"Recreate");
+	TFile *d;
+	TFile *s;
+	TFile *s2;
+	TFile *s3;
+	float data;
+	float sig;
+	float sig2;
+	float sig3;
+	float ttbar;
+	float wjets;
+	float singletop;
+	//float qcd;
+	float vv;
+	float zjets;
+
+	std::string weight = "__WEIGHT__*"+lumi;
+	
+	if(chn == "mu"){
+		d = new TFile("mu2012.root");
+		data = makeHistogram(chn+"_"+cat+"__DATA",d,f,var,cut,bins,min,max);
+		weight = "__WEIGHT__*weight_MuonEff_singleLepCalc*"+lumi;
+		d->Close();
+	}
+	else if(chn == "ele"){
+		d = new TFile("ele2012.root");
+		data = makeHistogram(chn+"_"+cat+"__DATA",d,f,var,cut,bins,min,max);
+		weight = "__WEIGHT__*weight_ElectronEff_53x_singleLepCalc*"+lumi;
+		d->Close();
+	}
+	else{
+		std::cout << "Undefined Channel!! Bad things are about to happen" << std::endl;
+	}
+
+	//for loop for different masses eventually goes here:
+			s = new TFile("TpTH750.root");
+			sig = makeHistogram(chn+"_"+cat+"__th750",s,f,var,"("+cut+")*"+weight,bins,min,max);
+			s->Close();
+			s2 = new TFile("TpTZ750.root");
+			sig2 = makeHistogram(chn+"_"+cat+"__tz750",s2,f,var,"("+cut+")*"+weight,bins,min,max);
+			s2->Close();
+			s3 = new TFile("TpBW750.root");
+			sig3 = makeHistogram(chn+"_"+cat+"__bw750",s3,f,var,"("+cut+")*"+weight,bins,min,max);
+			s3->Close();
+
+
+	
+
+	TFile *e = new TFile("EWK.root");
+	wjets = makeHistogram(chn+"_"+cat+"__ewk",e,f,var,"("+cut+")*"+weight,bins,min,max);
+	TFile *tt = new TFile("TT.root");
+	ttbar = makeHistogram(chn+"_"+cat+"__ttbar",tt,f,var,"("+cut+")*"+weight,bins,min,max);
+	TFile *t = new TFile("STOP.root");
+	singletop = makeHistogram(chn+"_"+cat+"__stop",t,f,var,"("+cut+")*"+weight,bins,min,max);
+	f->Close();
+	e->Close();
+	tt->Close();
+	t->Close();
+
+	
+}
+
+
 float makeHistogram(std::string name, TFile* fIn, TFile* fOut, std::string var, std::string cut, int bins, float min, float max, float scaleFactor = 1.) {
 
 	 TTree* tree = fIn->Get("ljmet");
@@ -552,34 +617,12 @@ void convertToDNDM(TH1F* histo) {
 
 
 
-// void scaleHistogram(std::string folder, std::string histo, float scaleFactor)
-//   {
-//     TH1F * h =(TH1F*) fout_->Get((folder+"/"+histo).c_str());
-//     h->Scale(scaleFactor);
-//     fout_->cd(folder.c_str());
-//     h->Write(h->GetName(),TObject::kOverwrite);
-//     fout_->cd();
-//     for(unsigned int i=0;i<shifts_.size();++i) {
-//       TH1F * hh =(TH1F*) fout_->Get((folder+"/"+histo+"_"+shiftsPostFix_[i]+"Up").c_str());
-//       if(hh!=0) {
-// 
-// 	hh->Scale(scaleFactor);
-// 	fout_->cd(folder.c_str());
-// 	hh->Write(hh->GetName(),TObject::kOverwrite);
-// 	fout_->cd();
-// 
-//       }
-// 
-//       TH1F * hhh =(TH1F*) fout_->Get((folder+"/"+histo+"_"+shiftsPostFix_[i]+"Down").c_str());
-//       if(hhh!=0) {
-// 	hhh->Scale(scaleFactor);
-// 	fout_->cd(folder.c_str());
-// 	hhh->Write(hhh->GetName(),TObject::kOverwrite);
-// 	fout_->cd();
-//       }
-//       
-//     }
-// }
+void scaleHistogram(TFile* fOut, std::string histo, float scaleFactor){
+    TH1F * h =(TH1F*) fOut->Get((histo).c_str());
+    h->Scale(scaleFactor);
+    h->Write(h->GetName(),TObject::kOverwrite);
+}
+
 // 
 // 
 // void mergeHistogram(std::string folder, std::string histo1, std::string histo2, std::string newName)
