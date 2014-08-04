@@ -47,9 +47,8 @@ hadd Ele2012D_1.root ../Ele2012D/Ele2012D_[1,2,3,4]*.root
 hadd Ele2012D_2.root ../Ele2012D/Ele2012D_[5,6,7,8,9]*.root
 hadd ele2012.root Ele2012*.root
 
-hadd QCDEM20.root ../QCDEM20/QCDEM20*.root
-hadd QCDEM30.root ../QCDEM30/QCDEM30*.root
-hadd QCDEM80.root ../QCDEM80/QCDEM80*.root
+
+find QCDEM80/*.root -size +20 | xargs hadd QCDEM80.root
 hadd QCDEM170.root ../QCDEM170/QCDEM170*.root
 hadd QCDEM250.root ../QCDEM250/QCDEM250*.root
 hadd QCDEM350.root ../QCDEM350/QCDEM350*.root
