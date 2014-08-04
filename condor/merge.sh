@@ -47,6 +47,14 @@ hadd Ele2012D_1.root ../Ele2012D/Ele2012D_[1,2,3,4]*.root
 hadd Ele2012D_2.root ../Ele2012D/Ele2012D_[5,6,7,8,9]*.root
 hadd ele2012.root Ele2012*.root
 
+hadd QCDEM20.root ../QCDEM20/QCDEM20*.root
+hadd QCDEM30.root ../QCDEM30/QCDEM30*.root
+hadd QCDEM80.root ../QCDEM80/QCDEM80*.root
+hadd QCDEM170.root ../QCDEM170/QCDEM170*.root
+hadd QCDEM250.root ../QCDEM250/QCDEM250*.root
+hadd QCDEM350.root ../QCDEM350/QCDEM350*.root
+
+
 
 EventWeightsIterative outputFile='TpTH750.root'      doOneD=1   weight=1.0   events=199988     histoName='histos/nevents'
 EventWeightsIterative outputFile='TpTZ750.root'      doOneD=1   weight=1.0   events=199976     histoName='histos/nevents'
@@ -76,5 +84,13 @@ EventWeightsIterative outputFile='WW.root'        	 doOneD=1   weight=56     eve
 EventWeightsIterative outputFile='ZZ.root'        	 doOneD=1   weight=17     events=9799908	  histoName='histos/nevents'
 EventWeightsIterative outputFile='WZ.root'        	 doOneD=1   weight=33.6   events=10000283	  histoName='histos/nevents'
 hadd VV.root WW.root WZ.root ZZ.root
+
+EventWeightsIterative outputFile='QCDEM20.root'        	 doOneD=1   weight=288600000.0*0.0101   events=35040695	  histoName='histos/nevents'
+EventWeightsIterative outputFile='QCDEM30.root'        	 doOneD=1   weight=74330000.0*0.0621   events=33088888	  histoName='histos/nevents'
+EventWeightsIterative outputFile='QCDEM80.root'        	 doOneD=1   weight=1191000.0*0.1539   events=34542763	  histoName='histos/nevents'
+EventWeightsIterative outputFile='QCDEM170.root'         doOneD=1   weight=30990.0*0.148   events=31697066	  histoName='histos/nevents'
+EventWeightsIterative outputFile='QCDEM250.root'         doOneD=1   weight=4250.0*0.131   events=34611322	  histoName='histos/nevents'
+EventWeightsIterative outputFile='QCDEM350.root'         doOneD=1   weight=810.0*0.11   events=34080562	  histoName='histos/nevents'
+hadd QCDEM.root QCDEM*.root
 
 rm Mu2012*.root Ele2012*.root W*Jets_*.root TT_LH.root TT_HH.root TT_LL.root Ttw.root Tbtw.root Ts.root Tbs.root Tt.root Tbt.root WW.root WZ.root ZZ.root QCD_*.root
