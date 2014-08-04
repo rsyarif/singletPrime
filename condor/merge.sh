@@ -47,7 +47,8 @@ hadd Ele2012D_1.root ../Ele2012D/Ele2012D_[1,2,3,4]*.root
 hadd Ele2012D_2.root ../Ele2012D/Ele2012D_[5,6,7,8,9]*.root
 hadd ele2012.root Ele2012*.root
 
-
+#hadd QCDEM170.root ../QCDEM170/QCDEM20*.root
+#hadd QCDEM250.root ../QCDEM250/QCDEM30*.root
 find ../QCDEM80/*.root -size +20 | xargs hadd QCDEM80.root
 hadd QCDEM170.root ../QCDEM170/QCDEM170*.root
 hadd QCDEM250.root ../QCDEM250/QCDEM250*.root
@@ -84,8 +85,8 @@ EventWeightsIterative outputFile='ZZ.root'        	 doOneD=1   weight=17     eve
 EventWeightsIterative outputFile='WZ.root'        	 doOneD=1   weight=33.6   events=10000283	  histoName='histos/nevents'
 hadd VV.root WW.root WZ.root ZZ.root
 
-EventWeightsIterative outputFile='QCDEM20.root'        	 doOneD=1   weight=288600000.0*0.0101   events=35040695	  histoName='histos/nevents'
-EventWeightsIterative outputFile='QCDEM30.root'        	 doOneD=1   weight=74330000.0*0.0621   events=33088888	  histoName='histos/nevents'
+#EventWeightsIterative outputFile='QCDEM20.root'        	 doOneD=1   weight=288600000.0*0.0101   events=35040695	  histoName='histos/nevents'
+#EventWeightsIterative outputFile='QCDEM30.root'        	 doOneD=1   weight=74330000.0*0.0621   events=33088888	  histoName='histos/nevents'
 EventWeightsIterative outputFile='QCDEM80.root'        	 doOneD=1   weight=1191000.0*0.1539   events=34542763	  histoName='histos/nevents'
 EventWeightsIterative outputFile='QCDEM170.root'         doOneD=1   weight=30990.0*0.148   events=31697066	  histoName='histos/nevents'
 EventWeightsIterative outputFile='QCDEM250.root'         doOneD=1   weight=4250.0*0.131   events=34611322	  histoName='histos/nevents'
