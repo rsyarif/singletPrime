@@ -49,10 +49,10 @@ hadd ele2012.root Ele2012*.root
 
 #hadd QCDEM170.root ../QCDEM170/QCDEM20*.root
 #hadd QCDEM250.root ../QCDEM250/QCDEM30*.root
-find ../QCDEM80/*.root -size +20 | xargs hadd QCDEM80.root
-hadd QCDEM170.root ../QCDEM170/QCDEM170*.root
-hadd QCDEM250.root ../QCDEM250/QCDEM250*.root
-hadd QCDEM350.root ../QCDEM350/QCDEM350*.root
+find ../QCDEM80/*.root -size +20 | xargs hadd QCDEM_80.root
+hadd QCDEM_170.root ../QCDEM170/QCDEM170*.root
+hadd QCDEM_250.root ../QCDEM250/QCDEM250*.root
+hadd QCDEM_350.root ../QCDEM350/QCDEM350*.root
 
 
 
@@ -93,4 +93,4 @@ EventWeightsIterative outputFile='QCDEM250.root'         doOneD=1   weight=4250.
 EventWeightsIterative outputFile='QCDEM350.root'         doOneD=1   weight=810.0*0.11   events=34080562	  histoName='histos/nevents'
 hadd QCDEM.root QCDEM*.root
 
-rm Mu2012*.root Ele2012*.root W*Jets_*.root TT_LH.root TT_HH.root TT_LL.root Ttw.root Tbtw.root Ts.root Tbs.root Tt.root Tbt.root WW.root WZ.root ZZ.root QCD_*.root
+rm Mu2012*.root Ele2012*.root W*Jets_*.root TT_LH.root TT_HH.root TT_LL.root Ttw.root Tbtw.root Ts.root Tbs.root Tt.root Tbt.root WW.root WZ.root ZZ.root QCDEM_*.root
