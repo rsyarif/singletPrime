@@ -85,12 +85,12 @@ EventWeightsIterative outputFile='ZZ.root'        	 doOneD=1   weight=17     eve
 EventWeightsIterative outputFile='WZ.root'        	 doOneD=1   weight=33.6   events=10000283	  histoName='histos/nevents'
 hadd VV.root WW.root WZ.root ZZ.root
 
-#EventWeightsIterative outputFile='QCDEM20.root'        	 doOneD=1   weight=288600000.0*0.0101   events=35040695	  histoName='histos/nevents'
-#EventWeightsIterative outputFile='QCDEM30.root'        	 doOneD=1   weight=74330000.0*0.0621   events=33088888	  histoName='histos/nevents'
-EventWeightsIterative outputFile='QCDEM_80.root'        	 doOneD=1   weight=1191000.0*0.1539   events=34542763	  histoName='histos/nevents'
-EventWeightsIterative outputFile='QCDEM_170.root'         doOneD=1   weight=30990.0*0.148   events=31697066	  histoName='histos/nevents'
-EventWeightsIterative outputFile='QCDEM_250.root'         doOneD=1   weight=4250.0*0.131   events=34611322	  histoName='histos/nevents'
-EventWeightsIterative outputFile='QCDEM_350.root'         doOneD=1   weight=810.0*0.11   events=34080562	  histoName='histos/nevents'
+#EventWeightsIterative outputFile='QCDEM20.root'        	 doOneD=1   weight=2914860   events=35040695	  histoName='histos/nevents'
+#EventWeightsIterative outputFile='QCDEM30.root'        	 doOneD=1   weight=4615893   events=33088888	  histoName='histos/nevents'
+EventWeightsIterative outputFile='QCDEM_80.root'        	 doOneD=1   weight=183294.9   events=34542763	  histoName='histos/nevents'
+EventWeightsIterative outputFile='QCDEM_170.root'         doOneD=1   weight=4586.52   events=31697066	  histoName='histos/nevents'
+EventWeightsIterative outputFile='QCDEM_250.root'         doOneD=1   weight=556.75   events=34611322	  histoName='histos/nevents'
+EventWeightsIterative outputFile='QCDEM_350.root'         doOneD=1   weight=89.1   events=34080562	  histoName='histos/nevents'
 hadd QCDEM.root QCDEM*.root
 
 rm Mu2012*.root Ele2012*.root W*Jets_*.root TT_LH.root TT_HH.root TT_LL.root Ttw.root Tbtw.root Ts.root Tbs.root Tt.root Tbt.root WW.root WZ.root ZZ.root QCDEM_*.root
