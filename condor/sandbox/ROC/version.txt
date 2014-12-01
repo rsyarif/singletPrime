@@ -1,0 +1,4 @@
+v0 : original
+v1 : only effbkg vs effsig
+
+current: adding S/B, S/sqrtB, S/sqrtSB, S/sqrtSBdelta. need to offset TLatex point labels, made different colors, added canvas 6 for super imposing.

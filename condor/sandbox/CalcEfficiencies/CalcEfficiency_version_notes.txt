@@ -1,0 +1,13 @@
+v0 : calculates only upto cut5 and only calculates TpTH750 and TpJTH750.
+
+v1 : calculates up to cut6 and all mass points of TpJTH.
+
+v2 : added makeGraph() to plot efficiencies and compTHandJTH()
+
+v3 : add ttbar background efficiency in graph in makeGraph() and graphRatio() eff_signal/eff_bkg ratio
+
+v4 : update compTHandJTH() for relative cuts
+
+v5 : erased eff_s/eff_b, instead implemented S/B, S/sqrt(B), S/sqrt(S+B) calculations and plots. Can definitely be cleaned up.
+
+current : add S/sqrt(S + B + deltaB).
